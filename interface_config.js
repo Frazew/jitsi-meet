@@ -14,13 +14,13 @@ var interfaceConfig = {
     INITIAL_TOOLBAR_TIMEOUT: 20000,
     TOOLBAR_TIMEOUT: 4000,
     TOOLBAR_ALWAYS_VISIBLE: false,
-    DEFAULT_REMOTE_DISPLAY_NAME: 'Fellow Jitster',
-    DEFAULT_LOCAL_DISPLAY_NAME: 'me',
-    SHOW_JITSI_WATERMARK: true,
+    DEFAULT_REMOTE_DISPLAY_NAME: 'INTien',
+    DEFAULT_LOCAL_DISPLAY_NAME: 'moi',
+    SHOW_JITSI_WATERMARK: false,
     JITSI_WATERMARK_LINK: 'https://jitsi.org',
 
     // if watermark is disabled by default, it can be shown only for guests
-    SHOW_WATERMARK_FOR_GUESTS: true,
+    SHOW_WATERMARK_FOR_GUESTS: false,
     SHOW_BRAND_WATERMARK: false,
     BRAND_WATERMARK_LINK: '',
     SHOW_POWERED_BY: false,
@@ -28,16 +28,30 @@ var interfaceConfig = {
     GENERATE_ROOMNAMES_ON_WELCOME_PAGE: true,
     DISPLAY_WELCOME_PAGE_CONTENT: true,
     DISPLAY_WELCOME_PAGE_TOOLBAR_ADDITIONAL_CONTENT: false,
-    APP_NAME: 'Jitsi Meet',
+    APP_NAME: 'BPM Nightout - MiNET',
     NATIVE_APP_NAME: 'Jitsi Meet',
-    PROVIDER_NAME: 'Jitsi',
+    PROVIDER_NAME: 'Jitsi sur MiNET',
     LANG_DETECTION: true, // Allow i18n to detect the system language
     INVITATION_POWERED_BY: true,
+
+    RECOMMENDED_ROOMS: [
+        {
+            title: 'Petite salle',
+            url: 'petite-salle',
+            ytURL: 'https://www.youtube.com/watch?v=dsmsAeHWhO4'
+        },
+        {
+            title: 'Grande salle',
+            url: 'grande-salle',
+            ytURL: 'https://www.youtube.com/watch?v=5OAysfkcMjg'
+        }
+    ],
+
 
     /**
      * If we should show authentication block in profile
      */
-    AUTHENTICATION_ENABLE: true,
+    AUTHENTICATION_ENABLE: false,
 
     /**
      * The name of the toolbar buttons to display in the toolbar. If present,
@@ -47,11 +61,11 @@ var interfaceConfig = {
      * jwt.
      */
     TOOLBAR_BUTTONS: [
-        'microphone', 'camera', 'closedcaptions', 'desktop', 'fullscreen',
-        'fodeviceselection', 'hangup', 'profile', 'info', 'chat', 'recording',
-        'livestreaming', 'etherpad', 'sharedvideo', 'settings', 'raisehand',
-        'videoquality', 'filmstrip', 'invite', 'feedback', 'stats', 'shortcuts',
-        'tileview', 'videobackgroundblur', 'download', 'help', 'mute-everyone'
+        'camera', 'fullscreen',
+        'fodeviceselection', 'hangup', 'profile', 'info', 'chat',
+        'sharedvideo', 'settings',
+        'videoquality', 'filmstrip', 'invite', 'feedback', 'shortcuts',
+        'tileview', 'download', 'help', 'mute-everyone'
     ],
 
     SETTINGS_SECTIONS: [ 'devices', 'language', 'moderator', 'profile', 'calendar' ],
@@ -90,7 +104,7 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    DISABLE_TRANSCRIPTION_SUBTITLES: false,
+    DISABLE_TRANSCRIPTION_SUBTITLES: true,
 
     /**
      * Whether the ringing sound in the call/ring overlay is disabled. If
@@ -98,7 +112,7 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    DISABLE_RINGING: false,
+    DISABLE_RINGING: true,
     AUDIO_LEVEL_PRIMARY_COLOR: 'rgba(255,255,255,0.4)',
     AUDIO_LEVEL_SECONDARY_COLOR: 'rgba(255,255,255,0.2)',
     POLICY_LOGO: null,
@@ -114,7 +128,7 @@ var interfaceConfig = {
      *
      * @type {boolean}
      */
-    MOBILE_APP_PROMO: true,
+    MOBILE_APP_PROMO: false,
 
     /**
      * Maximum coeficient of the ratio of the large video to the visible area
