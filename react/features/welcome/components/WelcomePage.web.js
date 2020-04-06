@@ -3,11 +3,8 @@
 import React from 'react';
 
 import { translate } from '../../base/i18n';
-import { Watermarks } from '../../base/react';
 import { connect } from '../../base/redux';
-import { isMobileBrowser } from '../../base/environment/utils';
-import { CalendarList } from '../../calendar-sync';
-import { RecentList } from '../../recent-list';
+import { RecommendedList } from '../../recommended-list';
 import { SettingsButton, SETTINGS_TABS } from '../../settings';
 
 import { AbstractWelcomePage, _mapStateToProps } from './AbstractWelcomePage';
@@ -122,6 +119,15 @@ class WelcomePage extends AbstractWelcomePage {
         document.body.classList.add('welcome-page');
         document.title = interfaceConfig.APP_NAME;
 
+        // eslint-disable-next-line no-undef
+        discordInvite.init({
+            inviteCode: 'ZsjjYSz',
+            title: 'BPM Onlight Night',
+            width: 'auto'
+        });
+        // eslint-disable-next-line no-undef
+        discordInvite.render();
+
         if (this.state.generateRoomnames) {
             this._updateRoomname();
         }
@@ -161,16 +167,12 @@ class WelcomePage extends AbstractWelcomePage {
         const { APP_NAME } = interfaceConfig;
         const showAdditionalContent = this._shouldShowAdditionalContent();
         const showAdditionalToolbarContent = this._shouldShowAdditionalToolbarContent();
-        const showResponsiveText = this._shouldShowResponsiveText();
 
         return (
             <div
                 className = { `welcome ${showAdditionalContent
                     ? 'with-content' : 'without-content'}` }
                 id = 'welcome_page'>
-                <div className = 'welcome-watermark'>
-                    <Watermarks />
-                </div>
                 <div className = 'header'>
                     <div className = 'welcome-page-settings'>
                         <SettingsButton
@@ -182,7 +184,9 @@ class WelcomePage extends AbstractWelcomePage {
                             : null
                         }
                     </div>
-                    <div className = 'header-image' />
+                    <img
+                        className = 'header-image'
+                        src = '/images/onlight.png' />
                     <div className = 'header-text'>
                         <h1 className = 'header-text-title'>
                             { t('welcomepage.title') }
@@ -191,39 +195,16 @@ class WelcomePage extends AbstractWelcomePage {
                             { t('welcomepage.appDescription',
                                 { app: APP_NAME }) }
                         </p>
+                        <div id = 'discordInviteBox' />
                     </div>
-                    <div id = 'enter_room'>
-                        <div className = 'enter-room-input-container'>
-                            <div className = 'enter-room-title'>
-                                { t('welcomepage.enterRoomTitle') }
-                            </div>
-                            <form onSubmit = { this._onFormSubmit }>
-                                <input
-                                    autoFocus = { true }
-                                    className = 'enter-room-input'
-                                    id = 'enter_room_field'
-                                    onChange = { this._onRoomChange }
-                                    pattern = { ROOM_NAME_VALIDATE_PATTERN_STR }
-                                    placeholder = { this.state.roomPlaceholder }
-                                    ref = { this._setRoomInputRef }
-                                    title = { t('welcomepage.roomNameAllowedChars') }
-                                    type = 'text'
-                                    value = { this.state.room } />
-                            </form>
-                        </div>
-                        <div
-                            className = 'welcome-page-button'
-                            id = 'enter_room_button'
-                            onClick = { this._onFormSubmit }>
-                            {
-                                showResponsiveText
-                                    ? t('welcomepage.goSmall')
-                                    : t('welcomepage.go')
-                            }
-                        </div>
-                    </div>
-                    { this._renderTabs() }
+                    <RecommendedList />
                 </div>
+                <p>
+                    Propulsé par MiNET, et par
+                    <a href = '//github.com/frazew'>
+                        un Jitsi Meet très fortement modifié
+                    </a>
+                </p>
                 { showAdditionalContent
                     ? <div
                         className = 'welcome-page-content'
@@ -281,27 +262,14 @@ class WelcomePage extends AbstractWelcomePage {
      * @returns {ReactElement|null}
      */
     _renderTabs() {
-        if (isMobileBrowser()) {
-            return null;
-        }
-
-        const { _calendarEnabled, _recentListEnabled, t } = this.props;
+        const { t } = this.props;
 
         const tabs = [];
 
-        if (_calendarEnabled) {
-            tabs.push({
-                label: t('welcomepage.calendar'),
-                content: <CalendarList />
-            });
-        }
-
-        if (_recentListEnabled) {
-            tabs.push({
-                label: t('welcomepage.recentList'),
-                content: <RecentList />
-            });
-        }
+        tabs.push({
+            label: t('welcomepage.recentList'),
+            content: <RecommendedList />
+        });
 
         if (tabs.length === 0) {
             return null;

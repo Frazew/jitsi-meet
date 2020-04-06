@@ -1,15 +1,12 @@
 .meetings-list {
-    font-size: 14px;
-    color: #253858;
-    line-height: 20px;
-    text-align: left;
-    text-overflow: ellipsis;
     display: flex;
     flex-direction: column;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
+    align-items: center;
+    max-width: calc(100% - 40px);
+    width: $welcomePageEnterRoomWidth;
+    z-index: $zindex2;
+    border-radius: $welcomePageEnterRoomBorderRadius;
+    color: #253858;
 
     .meetings-list-empty {
         text-align: center;
@@ -43,16 +40,24 @@
     }
 
     .item {
-        background: rgba(255,255,255,0.50);
         box-sizing: border-box;
         display: inline-flex;
         margin-top: 5px;
         min-height: 92px;
         width: 100%;
         word-break: break-word;
-        display: flex;
         flex-direction: row;
         text-align: left;
+
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px
+        rgba(0, 0, 0, 0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
 
         &:first-child {
             margin-top: 0px;
@@ -63,12 +68,31 @@
             flex-direction: column;
             width: 140px;
             flex-grow: 0;
-            padding-left: 30px;
-            padding-top: 25px;
+            background: #FF0000;
+            color: #FFFFFF;
+            text-align: center;
+            justify-content: center;
+            font-size: large;
+
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: 0 0 1px
+            rgba(0, 0, 0, 0);
+            overflow: hidden;
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-property: color, background-color;
+            transition-property: color, background-color;
 
             .date {
                 font-weight: bold;
                 padding-bottom: 5px;
+            }
+
+            &:hover {
+                cursor: pointer;
+                background-color: #CC0000;
+                color: white;
             }
         }
 
@@ -77,12 +101,32 @@
             flex-direction: column;
             flex-grow: 1;
             padding-left: 30px;
-            padding-top: 25px;
+            justify-content: center;
+            background: rgb(255,255,255);
+
+            vertical-align: middle;
+            -webkit-transform: perspective(1px) translateZ(0);
+            transform: perspective(1px) translateZ(0);
+            box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.3);
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.3s;
+            -webkit-transition-property: transform,box-shadow;
+            transition-property: transform,box-shadow;
 
             .title {
-                font-size: 16px;
+                font-size: x-large;
                 font-weight: bold;
-                padding-bottom: 5px;
+            }
+
+            &.with-click-handler {
+                cursor: pointer;
+            }
+
+            &.with-click-handler:hover {
+                -webkit-transform: translateX(-80px);
+                transform: translateX(-80px);
+                box-shadow: -5px 0px 10px 0px rgba(0, 0, 0, 0.5);
+                z-index: 3;
             }
         }
 
@@ -92,14 +136,6 @@
             justify-content: center;
             flex-grow: 0;
             padding-right: 30px;
-        }
-
-        &.with-click-handler {
-            cursor: pointer;
-        }
-
-        &.with-click-handler:hover {
-            background-color: #75A7E7;
         }
 
         .add-button {

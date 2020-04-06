@@ -170,7 +170,7 @@ $watermarkHeight: 74px;
  */
 $welcomePageDescriptionColor: #fff;
 $welcomePageFontFamily: inherit;
-$welcomePageBackground: linear-gradient(-90deg, #1251AE 0%, #0074FF 50%, #1251AE 100%);
+$welcomePageBackground: url("../images/welcome-back.jpg");
 $welcomePageTitleColor: #fff;
 
 $welcomePageHeaderBackground: none;
@@ -180,7 +180,9 @@ $welcomePageHeaderBackgroundRepeat: none;
 $welcomePageHeaderBackgroundSize: none;
 $welcomePageHeaderPaddingBottom: 0px;
 
-$welcomePageHeaderTextMarginTop: 35px;
+$welcomePageHeaderImageMarginTop: 20px;
+
+$welcomePageHeaderTextMarginTop: 0px;
 $welcomePageHeaderTextMarginBottom: 35px;
 
 $welcomePageHeaderTextTitleMarginBottom: 16px;
