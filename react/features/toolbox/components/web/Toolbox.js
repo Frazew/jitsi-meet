@@ -84,6 +84,7 @@ import VideoSettingsButton from './VideoSettingsButton';
 import {
     ClosedCaptionButton
 } from '../../../subtitles';
+import { PARTICIPANT_ROLE } from '../../../base/participants/constants';
 
 /**
  * The type of the React {@code Component} props of {@link Toolbox}.
@@ -166,6 +167,17 @@ type Props = {
      * Whether or not the local participant is screensharing.
      */
     _screensharing: boolean,
+
+    /**
+     * The tooltip key to use when video sharing is disabled. Or undefined
+     * if non to be shown and the button to be hidden.
+     */
+    _videoSharingDisabledTooltipKey: boolean,
+
+    /**
+     * Whether or not videosharing is initialized.
+     */
+    _videoSharingEnabled: boolean,
 
     /**
      * Whether or not the local participant is sharing a YouTube video.
@@ -937,6 +949,49 @@ class Toolbox extends Component<Props, State> {
     }
 
     /**
+     * Returns true if the the video sharing button should be visible and
+     * false otherwise.
+     *
+     * @returns {boolean}
+     */
+    _isVideoSharingButtonVisible() {
+        const {
+            _videoSharingEnabled,
+            _videoSharingDisabledTooltipKey
+        } = this.props;
+
+        return _videoSharingEnabled || _videoSharingDisabledTooltipKey;
+    }
+
+    /**
+     * Renders a button for toggleing video sharing.
+     *
+     * @private
+     * @param {boolean} isInOverflowMenu - True if the button is moved to the
+     * overflow menu.
+     * @returns {ReactElement|null}
+     */
+    _renderVideoSharingButton() {
+        const {
+            _videoSharingEnabled,
+            _sharingVideo,
+            t
+        } = this.props;
+
+        if (!this._isVideoSharingButtonVisible()) {
+            return null;
+        }
+
+        return (<OverflowMenuItem
+            accessibilityLabel = { t('toolbar.accessibilityLabel.sharedvideo') }
+            disabled = { !_videoSharingEnabled }
+            icon = { IconShareVideo }
+            key = 'sharedvideo'
+            onClick = { this._onToolbarToggleSharedVideo }
+            text = { _sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo') } />);
+    }
+
+    /**
      * Returns true if the profile button is visible and false otherwise.
      *
      * @returns {boolean}
@@ -956,7 +1011,6 @@ class Toolbox extends Component<Props, State> {
             _feedbackConfigured,
             _fullScreen,
             _screensharing,
-            _sharingVideo,
             t
         } = this.props;
 
@@ -983,12 +1037,7 @@ class Toolbox extends Component<Props, State> {
                 key = 'record'
                 showLabel = { true } />,
             this._shouldShowButton('sharedvideo')
-                && <OverflowMenuItem
-                    accessibilityLabel = { t('toolbar.accessibilityLabel.sharedvideo') }
-                    icon = { IconShareVideo }
-                    key = 'sharedvideo'
-                    onClick = { this._onToolbarToggleSharedVideo }
-                    text = { _sharingVideo ? t('toolbar.stopSharedVideo') : t('toolbar.sharedvideo') } />,
+                && this._renderVideoSharingButton(),
             this._shouldShowButton('etherpad')
                 && <SharedDocumentButton
                     key = 'etherpad'
@@ -1381,6 +1430,7 @@ function _mapStateToProps(state) {
         _overflowMenuVisible: overflowMenuVisible,
         _raisedHand: localParticipant.raisedHand,
         _screensharing: localVideo && localVideo.videoType === 'desktop',
+        _videoSharingEnabled: Boolean(localParticipant?.role === PARTICIPANT_ROLE.MODERATOR),
         _sharingVideo: sharedVideoStatus === 'playing'
             || sharedVideoStatus === 'start'
             || sharedVideoStatus === 'pause',
