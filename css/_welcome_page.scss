@@ -65,6 +65,10 @@ body.welcome-page {
             align-self: $welcomePageHeaderTextDescriptionAlignSelf;
         }
 
+        #discordInviteBox {
+            margin-top: 15px;
+        }
+
         #enter_room {
             display: flex;
             align-items: center;

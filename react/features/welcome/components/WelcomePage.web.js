@@ -195,13 +195,14 @@ class WelcomePage extends AbstractWelcomePage {
                             { t('welcomepage.appDescription',
                                 { app: APP_NAME }) }
                         </p>
-                        <div id = 'discordInviteBox' />
                     </div>
                     <RecommendedList />
+                    <div
+                        id = 'discordInviteBox' />
                 </div>
                 <p>
-                    Propulsé par MiNET, et par
-                    <a href = '//github.com/frazew'>
+                    Propulsé par MiNET, et par&nbsp;
+                    <a href = '//github.com/Frazew/jitsi-meet'>
                         un Jitsi Meet très fortement modifié
                     </a>
                 </p>
