@@ -2487,10 +2487,7 @@ export default {
             configRoom => {
                 if (configRoom.url === APP.conference.roomName) {
                     APP.UI.onSharedVideoStart(getLocalParticipant(APP.store.getState()).id, configRoom.ytURL, {
-                        state: 'playing',
-                        time: 0,
-                        isMuted: false,
-                        volume: 100
+                        state: 'playing'
                     });
                 }
             }
