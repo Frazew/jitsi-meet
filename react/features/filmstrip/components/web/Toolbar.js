@@ -9,6 +9,7 @@ import {
     HangupButton,
     VideoMuteButton
 } from '../../../toolbox';
+import SwitchRoomButton from '../../../toolbox/components/SwitchRoomButton';
 
 declare var interfaceConfig: Object;
 
@@ -47,6 +48,9 @@ class Toolbar extends Component<Props> {
                 <HangupButton
                     tooltipPosition = 'left'
                     visible = { this._shouldShowButton('hangup') } />
+                <SwitchRoomButton
+                    tooltipPosition = 'left'
+                    visible = { true } />
                 <AudioMuteButton
                     tooltipPosition = 'left'
                     visible = { this._shouldShowButton('microphone') } />

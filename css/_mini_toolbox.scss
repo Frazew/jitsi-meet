@@ -50,7 +50,7 @@
 }
 
 .filmstrip-toolbox {
-    flex-direction: column;
+    flex-direction: column-reverse;
 
     .toolbox-button {
         &:nth-child(1) {
