@@ -71,6 +71,13 @@ body.welcome-page {
             z-index: $zindex2;
         }
 
+        .header-image-below {
+            display: flex;
+            flex-direction: column;
+            height: 60px;
+            z-index: $zindex2;
+        }
+
         .header-text {
             display: flex;
             flex-direction: column;

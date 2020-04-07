@@ -122,11 +122,14 @@ export default class MeetingsAlternativeList extends Component<Props> {
             url,
             ytURL
         } = meeting;
-        const { hideURL = false } = this.props;
+        const { hideURL = false, disabled } = this.props;
         const onPress = this._onPress(url);
         const onPressYT = this._onPress(`https://youtube.com/watch?v=${ytURL}`);
         const rootClassName
             = 'item without-click-handler';
+        const leftClassName
+            = `left-column ${
+                onPress ? 'with-click-handler' : 'without-click-handler'}`;
         const itemTitleClass
             = `right-column ${
                 onPress ? 'with-click-handler' : 'without-click-handler'}`;
@@ -136,7 +139,7 @@ export default class MeetingsAlternativeList extends Component<Props> {
                 className = { rootClassName }
                 key = { index }>
                 <Container
-                    className = 'left-column'
+                    className = { leftClassName }
                     onClick = { onPressYT }>
                     {
                         ytURL
@@ -149,6 +152,7 @@ export default class MeetingsAlternativeList extends Component<Props> {
                     onClick = { onPress }>
                     <Text className = 'title'>
                         { title }
+                        { disabled ? <small>&nbsp;&nbsp;Pas encore ouverte</small> : null}
                     </Text>
                     {
                         hideURL || !url ? null : (

@@ -197,7 +197,7 @@ class WelcomePage extends AbstractWelcomePage {
                             className = { 'item without-click-handler' }
                             id = 'discord-item'>
                             <Container
-                                className = 'left-column'
+                                className = 'left-column with-click-handler'
                                 onClick = { this._onPressDiscord }>
                                 <Icon src = { IconDiscord } />
                             </Container>
@@ -213,7 +213,7 @@ class WelcomePage extends AbstractWelcomePage {
                             className = { 'item without-click-handler' }
                             id = 'facebook-item'>
                             <Container
-                                className = 'left-column'
+                                className = 'left-column with-click-handler'
                                 onClick = { this._onPressFacebook }>
                                 <Icon src = { IconFacebook } />
                             </Container>
@@ -232,6 +232,11 @@ class WelcomePage extends AbstractWelcomePage {
                             un Jitsi Meet plutôt modifié
                         </a>
                     </p>
+                    <a href = '//www.minet.net/'>
+                        <img
+                            className = 'header-image-below'
+                            src = '//www.minet.net/res/img/minet_light.png' />
+                    </a>
                 </div>
 
                 { showAdditionalContent

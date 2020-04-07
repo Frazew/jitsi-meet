@@ -90,9 +90,12 @@
             }
 
             &:hover {
-                cursor: pointer;
                 background-color: #CC0000;
                 color: white;
+            }
+
+            &.with-click-handler {
+                cursor: pointer;
             }
         }
 
