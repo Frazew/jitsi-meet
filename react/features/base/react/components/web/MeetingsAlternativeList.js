@@ -121,7 +121,8 @@ export default class MeetingsAlternativeList extends Component<Props> {
             title,
             url,
             ytURL,
-            hint
+            hint,
+            hidden = false
         } = meeting;
         const { hideURL = false, disabled } = this.props;
         const onPress = this._onPress(url);
@@ -135,6 +136,10 @@ export default class MeetingsAlternativeList extends Component<Props> {
         const itemTitleClass
             = `right-column ${
                 onPress ? 'with-click-handler' : 'without-click-handler'}`;
+
+        if (hidden) {
+            return;
+        }
 
         return (
             <Container
