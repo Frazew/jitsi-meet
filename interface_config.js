@@ -38,12 +38,14 @@ var interfaceConfig = {
         {
             title: 'Petite salle',
             url: 'petite-salle',
-            ytURL: 'https://www.youtube.com/watch?v=dsmsAeHWhO4'
+            ytURL: 'https://www.youtube.com/watch?v=dsmsAeHWhO4',
+            hint: ''
         },
         {
             title: 'Grande salle',
             url: 'grande-salle',
-            ytURL: 'https://www.youtube.com/watch?v=5OAysfkcMjg'
+            ytURL: 'https://www.youtube.com/watch?v=5OAysfkcMjg',
+            hint: ''
         }
     ],
 

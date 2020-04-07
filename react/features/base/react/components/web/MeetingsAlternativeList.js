@@ -120,7 +120,8 @@ export default class MeetingsAlternativeList extends Component<Props> {
         const {
             title,
             url,
-            ytURL
+            ytURL,
+            hint
         } = meeting;
         const { hideURL = false, disabled } = this.props;
         const onPress = this._onPress(url);
@@ -152,7 +153,7 @@ export default class MeetingsAlternativeList extends Component<Props> {
                     onClick = { onPress }>
                     <Text className = 'title'>
                         { title }
-                        { disabled ? <small>&nbsp;&nbsp;Pas encore ouverte</small> : null}
+                        { disabled ? <small>&nbsp;&nbsp;Pas encore ouverte - { hint } </small> : null}
                     </Text>
                     {
                         hideURL || !url ? null : (
