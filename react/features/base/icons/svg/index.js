@@ -83,3 +83,5 @@ export { default as IconVideoQualitySD } from './SD.svg';
 export { default as IconVolume } from './volume.svg';
 export { default as IconVolumeEmpty } from './volume-empty.svg';
 export { default as IconYoutube } from './youtube-brands.svg';
+export { default as IconDiscord } from './discord-brands.svg';
+export { default as IconFacebook } from './facebook-brands.svg';

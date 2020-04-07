@@ -47,6 +47,8 @@ var interfaceConfig = {
         }
     ],
 
+    DISCORD_LINK: 'https://example.com',
+    FACEBOOK_LINK: 'https://example.com',
 
     /**
      * If we should show authentication block in profile

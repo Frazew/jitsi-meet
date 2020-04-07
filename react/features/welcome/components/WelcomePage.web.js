@@ -9,6 +9,11 @@ import { SettingsButton, SETTINGS_TABS } from '../../settings';
 
 import { AbstractWelcomePage, _mapStateToProps } from './AbstractWelcomePage';
 import Tabs from './Tabs';
+import Container from '../../base/react/components/web/Container';
+import Icon from '../../base/icons/components/Icon';
+import { IconDiscord, IconFacebook } from '../../base/icons/svg';
+import Text from '../../base/react/components/web/Text';
+import { appNavigate } from '../../app';
 
 /**
  * The pattern used to validate room name.
@@ -104,6 +109,8 @@ class WelcomePage extends AbstractWelcomePage {
         this._setAdditionalToolbarContentRef
             = this._setAdditionalToolbarContentRef.bind(this);
         this._onTabSelected = this._onTabSelected.bind(this);
+        this._onPressDiscord = this._onPressDiscord.bind(this);
+        this._onPressFacebook = this._onPressFacebook.bind(this);
     }
 
     /**
@@ -118,15 +125,6 @@ class WelcomePage extends AbstractWelcomePage {
 
         document.body.classList.add('welcome-page');
         document.title = interfaceConfig.APP_NAME;
-
-        // eslint-disable-next-line no-undef
-        discordInvite.init({
-            inviteCode: 'ZsjjYSz',
-            title: 'BPM Onlight Night',
-            width: 'auto'
-        });
-        // eslint-disable-next-line no-undef
-        discordInvite.render();
 
         if (this.state.generateRoomnames) {
             this._updateRoomname();
@@ -163,7 +161,7 @@ class WelcomePage extends AbstractWelcomePage {
      * @returns {ReactElement|null}
      */
     render() {
-        const { t } = this.props;
+        const { t, dispatch } = this.props;
         const { APP_NAME } = interfaceConfig;
         const showAdditionalContent = this._shouldShowAdditionalContent();
         const showAdditionalToolbarContent = this._shouldShowAdditionalToolbarContent();
@@ -191,21 +189,51 @@ class WelcomePage extends AbstractWelcomePage {
                         <h1 className = 'header-text-title'>
                             { t('welcomepage.title') }
                         </h1>
-                        <p className = 'header-text-description'>
-                            { t('welcomepage.appDescription',
-                                { app: APP_NAME }) }
-                        </p>
                     </div>
                     <RecommendedList />
-                    <div
-                        id = 'discordInviteBox' />
+                    <Container
+                        className = 'meetings-list'>
+                        <Container
+                            className = { 'item without-click-handler' }
+                            id = 'discord-item'>
+                            <Container
+                                className = 'left-column'
+                                onClick = { this._onPressDiscord }>
+                                <Icon src = { IconDiscord } />
+                            </Container>
+                            <Container
+                                className = { 'right-column with-click-handler' }
+                                onClick = { this._onPressDiscord }>
+                                <Text className = 'title'>
+                                    { 'Discord' }
+                                </Text>
+                            </Container>
+                        </Container>
+                        <Container
+                            className = { 'item without-click-handler' }
+                            id = 'facebook-item'>
+                            <Container
+                                className = 'left-column'
+                                onClick = { this._onPressFacebook }>
+                                <Icon src = { IconFacebook } />
+                            </Container>
+                            <Container
+                                className = { 'right-column with-click-handler' }
+                                onClick = { this._onPressFacebook }>
+                                <Text className = 'title'>
+                                    { 'Lineup' }
+                                </Text>
+                            </Container>
+                        </Container>
+                    </Container>
+                    <p className = 'header-text-below'>
+                        Propulsé par MiNET, et par&nbsp;
+                        <a href = '//github.com/Frazew/jitsi-meet'>
+                            un Jitsi Meet plutôt modifié
+                        </a>
+                    </p>
                 </div>
-                <p>
-                    Propulsé par MiNET, et par&nbsp;
-                    <a href = '//github.com/Frazew/jitsi-meet'>
-                        un Jitsi Meet très fortement modifié
-                    </a>
-                </p>
+
                 { showAdditionalContent
                     ? <div
                         className = 'welcome-page-content'
@@ -362,6 +390,29 @@ class WelcomePage extends AbstractWelcomePage {
         return innerWidth <= WINDOW_WIDTH_THRESHOLD;
     }
 
+    /**
+     * Redirects to the configured facebook link
+     *
+     * @private
+     * @returns {void}
+     */
+    _onPressDiscord() {
+        const { dispatch } = this.props;
+
+        dispatch(appNavigate(interfaceConfig.DISCORD_LINK));
+    }
+
+    /**
+     * Redirects to the configured facebook link
+     *
+     * @private
+     * @returns {void}
+     */
+    _onPressFacebook() {
+        const { dispatch } = this.props;
+
+        dispatch(appNavigate(interfaceConfig.FACEBOOK_LINK));
+    }
 }
 
 export default translate(connect(_mapStateToProps)(WelcomePage));

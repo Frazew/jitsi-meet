@@ -14,6 +14,40 @@ body.welcome-page {
     min-height: 100vh;
     position: relative;
 
+    #discord-item {
+        margin-top: 5px;
+
+        .right-column {
+            color: #fff;
+            background: rgb(52, 58, 64);
+        }
+
+        .left-column {
+            background: #43b581;
+
+            &:hover {
+                background-color: #3ca374;
+            }
+        }
+    }
+
+    #facebook-item {
+        margin-top: 5px;
+
+        .right-column {
+            color: #fff;
+            background: rgb(52, 58, 64);
+        }
+
+        .left-column {
+            background: #3b5998;
+
+            &:hover {
+                background-color: #2f477a;
+            }
+        }
+    }
+
     .header {
         background-image: $welcomePageHeaderBackground;
         background-position: $welcomePageHeaderBackgroundPosition;
@@ -65,8 +99,15 @@ body.welcome-page {
             align-self: $welcomePageHeaderTextDescriptionAlignSelf;
         }
 
-        #discordInviteBox {
-            margin-top: 15px;
+        .header-text-below {
+            display: $welcomePageHeaderTextDescriptionDisplay;
+            color: $welcomePageDescriptionColor;
+            font-size: $welcomePageHeaderTextDescriptionFontSize;
+            font-weight: $welcomePageHeaderTextDescriptionFontWeight;
+            line-height: $welcomePageHeaderTextDescriptionLineHeight;
+            margin-bottom: $welcomePageHeaderTextDescriptionMarginBottom;
+            align-self: $welcomePageHeaderTextDescriptionAlignSelf;
+            margin-top: 20px;
         }
 
         #enter_room {
