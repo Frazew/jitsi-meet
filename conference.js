@@ -493,7 +493,7 @@ export default {
             audioOnlyError,
             screenSharingError,
             videoOnlyError;
-        const initialDevices = [ 'audio' ];
+        const initialDevices = [ 'video' ];
         const requestedAudio = true;
         let requestedVideo = false;
 
