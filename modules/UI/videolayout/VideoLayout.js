@@ -276,7 +276,7 @@ const VideoLayout = {
     addRemoteParticipantContainer(participant) {
         if (!participant || participant.local) {
             return;
-        } else if (participant.isFakeParticipant) {
+        }/* else if (participant.isFakeParticipant) {
             const sharedVideoThumb = new SharedVideoThumb(
                 participant,
                 SHARED_VIDEO_CONTAINER_TYPE,
@@ -285,7 +285,7 @@ const VideoLayout = {
             this.addRemoteVideoContainer(participant.id, sharedVideoThumb);
 
             return;
-        }
+        }*/
 
         const id = participant.id;
         const jitsiParticipant = APP.conference.getParticipantById(id);

@@ -17,9 +17,12 @@
     #dominantSpeaker,
     #filmstripLocalVideoThumbnail,
     #largeVideoElementsContainer,
-    #sharedVideo,
     .filmstrip__toolbar {
         display: none;
+    }
+
+    #sharedVideoIFrame {
+        height: 100% !important;
     }
 
     #remoteConnectionMessage,
@@ -39,9 +42,6 @@
     #remoteConnectionMessage,
     #remotePresenceMessage {
         display: none !important;
-    }
-    #largeVideoContainer {
-        background-color: $defaultBackground !important;
     }
 
     /**
