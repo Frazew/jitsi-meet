@@ -127,7 +127,8 @@ export default class MeetingsAlternativeList extends Component<Props> {
         const onPress = this._onPress(url);
         const onPressYT = this._onPress(`https://youtube.com/watch?v=${ytURL}`);
         const rootClassName
-            = 'item without-click-handler';
+            = `item${
+                disabled ? ' item-disabled' : ''}`;
         const leftClassName
             = `left-column ${
                 onPress ? 'with-click-handler' : 'without-click-handler'}`;
