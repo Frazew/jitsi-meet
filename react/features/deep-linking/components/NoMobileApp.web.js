@@ -34,11 +34,10 @@ export default class NoMobileApp extends Component<*> {
         return (
             <div className = { ns }>
                 <h2 className = { `${ns}__title` }>
-                    Video chat isn't available on mobile.
+                    Ce site a tendance à ne pas bien fonctionner sur téléphone.
                 </h2>
                 <p className = { `${ns}__description` }>
-                    Please use { interfaceConfig.NATIVE_APP_NAME } on desktop to
-                    join calls.
+                    Si vous voulez quand même essayer, passez en mode "Version pour ordinateur" dans les paramètres du navigateur.
                 </p>
             </div>
         );

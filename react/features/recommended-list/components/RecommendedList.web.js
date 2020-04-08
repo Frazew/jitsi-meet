@@ -72,7 +72,7 @@ class RecommendedList extends AbstractRecommendedList<Props> {
 
         return (
             <MeetingsAlternativeList
-                disabled = { true }
+                disabled = { false }
                 hideURL = { true }
                 listEmptyComponent = { this._getRenderListEmptyComponent() }
                 meetings = { localRecommendedList }
