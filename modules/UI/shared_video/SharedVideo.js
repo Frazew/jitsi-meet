@@ -186,12 +186,11 @@ export default class SharedVideoManager {
                         'origin': location.origin,
                         'fs': '0',
                         'autoplay': 0,
-                        'controls': showControls,
+                        'controls': true,
                         'rel': 0
                     },
                     events: {
                         'onReady': onPlayerReady,
-                        'onStateChange': onPlayerStateChange,
                         'onError': onPlayerError
                     }
                 });
