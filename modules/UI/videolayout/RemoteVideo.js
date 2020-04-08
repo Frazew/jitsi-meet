@@ -12,11 +12,13 @@ import {
     JitsiParticipantConnectionStatus
 } from '../../../react/features/base/lib-jitsi-meet';
 import {
-    getPinnedParticipant,
+    getLocalParticipant,
+    getPinnedParticipant, kickParticipant,
     pinParticipant
 } from '../../../react/features/base/participants';
 import { PresenceLabel } from '../../../react/features/presence-status';
 import {
+    KickRemoteParticipantDialog,
     REMOTE_CONTROL_MENU_STATES,
     RemoteVideoMenuTriggerButton
 } from '../../../react/features/remote-video-menu';
@@ -28,6 +30,9 @@ const logger = require('jitsi-meet-logger').getLogger(__filename);
 
 import SmallVideo from './SmallVideo';
 import UIUtils from '../util/UIUtil';
+import { updateSettings } from '../../../react/features/base/settings';
+import { openDialog } from '../../../react/features/base/dialog';
+import { PARTICIPANT_ROLE } from '../../../react/features/base/participants/constants';
 
 /**
  *
@@ -84,6 +89,7 @@ export default class RemoteVideo extends SmallVideo {
         this.updateIndicators();
         this.updateDisplayName();
         this.bindHoverHandler();
+        this._buildContextMenu();
         this.flipX = false;
         this.isLocal = false;
         this.popupMenuIsHovered = false;
@@ -118,6 +124,33 @@ export default class RemoteVideo extends SmallVideo {
         this._stopRemoteControl = this._stopRemoteControl.bind(this);
 
         this.container.onclick = this._onContainerClick;
+    }
+
+    /**
+     * Builds the context menu for the remote video.
+     */
+    _buildContextMenu() {
+        $.contextMenu({
+            selector: `#${this.videoSpanId}`,
+            zIndex: 10000,
+            items: {
+                kick: {
+                    name: 'Kick',
+                    callback: () => {
+                        if (getLocalParticipant(APP.store.getState()).role === PARTICIPANT_ROLE.MODERATOR) {
+                            APP.store.dispatch(kickParticipant(this.id));
+                            openDialog(KickRemoteParticipantDialog, { participantID: this.id })
+                        }
+                    }
+                }
+            },
+            events: {
+                show(options) {
+                    options.items.kick.name
+                        = 'Kick';
+                }
+            }
+        });
     }
 
     /**
@@ -418,6 +451,12 @@ export default class RemoteVideo extends SmallVideo {
         this.$container.toggleClass('audio-only', APP.conference.isAudioOnly());
         this.updateConnectionStatusIndicator();
 
+        if (this.isVideoPlayable()) {
+            this.$container.show();
+        } else {
+            this.$container.hide();
+        }
+
         // This must be called after 'updateConnectionStatusIndicator' because it
         // affects the display mode by modifying 'mutedWhileDisconnected' flag
         super.updateView();
@@ -513,7 +552,7 @@ export default class RemoteVideo extends SmallVideo {
 
         this.waitForPlayback(streamElement, stream);
         stream.attach(streamElement);
-
+        this.$container.show();
         if (!isVideo) {
             this._audioStreamElement = streamElement;
 

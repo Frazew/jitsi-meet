@@ -77,6 +77,15 @@ const VideoLayout = {
         // FIXME container type is totally different thing from the video type
         localVideoThumbnail.setVideoType(VIDEO_CONTAINER_TYPE);
         this.registerListeners();
+
+        setInterval(() => {
+            const remoteVideosDom = document.getElementById('filmstripRemoteVideosContainer');
+
+            for (let i = remoteVideosDom.children.length; i >= 0; i--) {
+                remoteVideosDom.appendChild(remoteVideosDom.children[Math.random() * i | 0]);
+            }
+
+        }, 20000);
     },
 
     /**
